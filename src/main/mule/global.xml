@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule
+	xmlns:opentelemetry="http://www.mulesoft.org/schema/mule/opentelemetry"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/opentelemetry http://www.mulesoft.org/schema/mule/opentelemetry/current/mule-opentelemetry.xsd">
+
+
+	<opentelemetry:config name="OpenTelemetry_Config"
+		doc:name="OpenTelemetry Config" serviceName="mulesoft-otel-dynatrace"
+		spanAllProcessors="false">
+
+		<opentelemetry:resource-attributes>
+			<opentelemetry:attribute key="mule.env"
+				value="dev" />
+			<opentelemetry:attribute
+				key="deployment.environment" value="dev" />
+		</opentelemetry:resource-attributes>
+
+		<opentelemetry:exporter>
+			<opentelemetry:otlp-exporter
+				collectorEndpoint="https://ksy96102.live.dynatrace.com/api/v2/otlp"
+				protocol="HTTP_PROTOBUF">
+				<opentelemetry:headers>
+					<opentelemetry:header key="Authorization"
+						value="Api-Token dt0c01.XXXX" />
+				</opentelemetry:headers>
+			</opentelemetry:otlp-exporter>
+		</opentelemetry:exporter>
+
+	</opentelemetry:config>
+
+ 
+</mule>
